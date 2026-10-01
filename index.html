@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#120b1d">
+<meta name="description" content="A tiny universe made Happy Girlfriend's Day ♡">
+<title>Happy Girlfriend's Day ♡</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#4d3040;
+  --muted:#846775;
+  --rose:#b95776;
+  --rose2:#df9aae;
+  --cream:#fff9fb;
+  --glass:rgba(255,255,255,.62);
+  --line:rgba(255,255,255,.72);
+  --shadow:0 24px 80px rgba(42,17,38,.14);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  font-family:Inter,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,214,229,.9),transparent 28%),
+    radial-gradient(circle at 85% 90%,rgba(255,222,194,.72),transparent 28%),
+    linear-gradient(135deg,#f8dce5,#f3d7e3 45%,#fff0e6);
+}
+body.modal-open{overflow:hidden}
+button,input{font:inherit}
+button{border:0;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible{outline:3px solid rgba(185,87,118,.3);outline-offset:3px}
+
+.bg-orb{position:fixed;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:-2;opacity:.42}
+.orb-a{width:360px;height:360px;left:-150px;top:-120px;background:#f3a9c0}
+.orb-b{width:330px;height:330px;right:-130px;bottom:-100px;background:#ffd0ad}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.035;background-image:url("https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=85'0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E")}
+
+.app{width:min(1120px,92%);margin:18px auto 90px}
+.nav{
+  position:sticky;top:14px;z-index:1000;
+  display:flex;align-items:center;gap:8px;
+  padding:8px;
+  border:1px solid var(--line);border-radius:26px;
+  background:rgba(255,255,255,.68);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  box-shadow:0 15px 55px rgba(64,28,45,.12);
+}
+.logo{
+  flex:0 0 auto;padding:8px 13px;background:transparent;
+  color:#974d67;font:700 27px "Dancing Script",cursive;cursor:pointer;
+}
+.tabs{display:flex;gap:4px;overflow:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto;padding:10px 13px;border-radius:15px;
+  background:transparent;color:#7b5b68;font-size:11px;font-weight:700;cursor:pointer;
+  transition:transform .35s var(--ease),background .35s var(--ease),color .35s var(--ease)
+}
+.tab:hover{transform:translateY(-2px);background:#f9e3e9}
+.tab.active{background:#f2c8d6;color:#8d3f59}
+
+.page{display:none;animation:pageIn .65s var(--ease) both}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.hero{min-height:680px;display:grid;place-items:center;text-align:center;padding:90px 15px 55px;position:relative}
+.hero-inner{max-width:820px}
+.eyebrow{font-size:10px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#b76b80;margin-bottom:20px}
+.hero h1{
+  font:700 clamp(72px,13vw,135px)/.76 "Dancing Script",cursive;
+  letter-spacing:-5px;color:#8f4660
+}
+.hero h1 span{display:block;color:#c05e7b}
+.hero p{max-width:650px;margin:32px auto;color:#765966;font-size:14px;line-height:1.9}
+.hero-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+.btn{
+  padding:13px 21px;border-radius:999px;cursor:pointer;font-size:12px;font-weight:800;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),filter .35s var(--ease)
+}
+.btn:hover{transform:translateY(-4px);filter:saturate(1.04)}
+.btn:active{transform:scale(.96)}
+.primary{color:white;background:linear-gradient(135deg,#b45a75,#913e5a);box-shadow:0 15px 32px rgba(155,66,91,.22)}
+.secondary{color:#8e4560;background:rgba(255,255,255,.78);border:1px solid #efd3dc}
+.floating{position:absolute;font-size:78px;right:4%;bottom:60px;animation:float 5s ease-in-out infinite;filter:drop-shadow(0 16px 12px rgba(70,30,45,.12))}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-18px) rotate(4deg)}}
+
+.section{padding:55px 0}
+.heading{margin-bottom:25px}
+.heading small{display:block;color:#b66a7e;font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:5px}
+.heading h2{font:700 53px "Dancing Script",cursive;color:#995069}
+.glass{
+  padding:25px;border:1px solid rgba(255,255,255,.85);border-radius:28px;
+  background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);transition:transform .45s var(--ease),box-shadow .45s var(--ease)
+}
+.glass:hover{transform:translateY(-6px);box-shadow:0 30px 90px rgba(42,17,38,.17)}
+.cards,.letter-grid,.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.icon{font-size:31px;margin-bottom:12px}
+.glass h3,.letter h3,.memory h3{font:600 29px Caveat,cursive;color:#995069}
+.glass p,.letter p,.memory p{margin-top:6px;font-size:12px;line-height:1.7;color:#80616b}
+
+.letter,.memory{
+  padding:25px;border-radius:28px;cursor:pointer;
+  background:linear-gradient(145deg,#fffaf9,#fff0f4);
+  border:1px solid rgba(190,105,130,.13);
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease)
+}
+.letter{min-height:195px}
+.letter:hover{transform:translateY(-8px) rotate(-.5deg);box-shadow:0 28px 65px rgba(70,30,45,.14)}
+.memory{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.memory span{font-size:58px;margin-bottom:8px}
+.memory:hover{transform:scale(1.025) rotate(.4deg);box-shadow:0 28px 65px rgba(70,30,45,.14)}
+
+.reason{
+  min-height:430px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:35px;border-radius:34px;background:radial-gradient(circle at top,#fff,#ffedf3);box-shadow:var(--shadow)
+}
+.reason-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#bb7084}
+.reason-text{max-width:780px;margin:25px auto;min-height:140px;display:flex;align-items:center;justify-content:center;font:600 clamp(37px,6vw,64px)/1.05 "Dancing Script",cursive;color:#9d5068}
+.meter-box{margin-top:18px;padding:25px;border-radius:30px;background:rgba(255,255,255,.7);text-align:center;box-shadow:0 15px 45px rgba(70,30,45,.08)}
+.meter-track{height:18px;margin:20px auto;max-width:650px;border-radius:999px;overflow:hidden;background:#efd5dd}
+.meter-fill{width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#db91a7,#a94d6a);transition:width 1.1s var(--ease)}
+
+.game{padding:30px;border-radius:32px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow);text-align:center}
+.game+.game{margin-top:20px}
+.game h3{font:600 44px "Dancing Script",cursive;color:#995069}
+.game-desc{margin-top:7px;font-size:12px;color:#85646e}
+.game-status{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}
+.stat{padding:8px 13px;border-radius:999px;background:#f8e0e6;font-size:11px;color:#915169;font-weight:800}
+.heart-grid{max-width:650px;margin:28px auto;display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
+.hunt-heart{height:58px;border-radius:17px;background:#fbe0e8;color:#a65972;font-size:24px;cursor:pointer;transition:transform .25s var(--ease),background .25s}
+.hunt-heart:hover{transform:translateY(-5px) scale(1.04)}
+.hunt-heart.wrong{animation:shake .35s;background:#f1c8d3}
+.hunt-heart.correct{background:#b9617c;color:white;animation:pop .5s var(--ease)}
+@keyframes shake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-4px)}}
+@keyframes pop{50%{transform:scale(1.3)}}
+.memory-board{max-width:650px;margin:25px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.memory-tile{aspect-ratio:1;border:0;border-radius:17px;background:#f5ccd8;cursor:pointer;font-size:27px;color:transparent;transition:transform .3s var(--ease),background .3s}
+.memory-tile.revealed,.memory-tile.matched{color:#8e4d63;background:#fff4f5}
+.memory-tile.matched{box-shadow:inset 0 0 0 2px #e1a5b5}
+.target-area{height:370px;margin:25px auto;max-width:750px;position:relative;overflow:hidden;border-radius:28px;background:radial-gradient(circle at 30% 20%,#fff,transparent 20%),linear-gradient(135deg,#f8d8e1,#fff0e7);border:2px dashed #e5b3c1}
+.target-heart{position:absolute;background:none;font-size:38px;cursor:pointer;transition:left .4s var(--ease),top .4s var(--ease);animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.2)}}
+
+.music-player{display:flex;align-items:center;gap:25px;padding:30px;border-radius:30px;background:linear-gradient(135deg,#fff,#fff0f4);box-shadow:var(--shadow)}
+.album{width:115px;height:115px;display:grid;place-items:center;border-radius:28px;background:linear-gradient(135deg,#e9adbd,#f8dce4);font-size:47px;animation:spin 8s linear infinite;animation-play-state:paused}
+.album.playing{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.music-info{flex:1}.music-info small{font-size:9px;letter-spacing:2px;color:#b16a7d;text-transform:uppercase}
+.music-info h3{font:600 35px "Dancing Script",cursive;color:#995069;margin-top:3px}
+.progress{height:5px;margin:16px 0;border-radius:999px;overflow:hidden;background:#efd6de}.progress-fill{width:0;height:100%;background:#b85d76}
+.controls{display:flex;gap:8px}.music-btn{width:43px;height:43px;border-radius:50%;background:#f6dbe3;color:#985069;cursor:pointer;transition:transform .3s var(--ease)}.music-btn:hover{transform:scale(1.08)}
+
+.star-room{min-height:570px;position:relative;overflow:hidden;border-radius:34px;background:radial-gradient(circle at 50% 40%,#5e405b,#251d37 65%,#171326);box-shadow:0 30px 90px rgba(40,20,45,.25)}
+.star{position:absolute;color:white;cursor:pointer;animation:twinkle 2.4s infinite ease-in-out}
+@keyframes twinkle{50%{opacity:.3;transform:scale(.72)}}
+.star-message{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;pointer-events:none}
+.star-message p{max-width:650px;font:500 clamp(30px,5vw,55px)/1.1 "Dancing Script",cursive;color:#fff4f7;opacity:.92}
+
+.secret-shell{min-height:620px;display:grid;place-items:center;text-align:center}
+.secret-card{width:min(430px,100%);padding:38px 28px;border-radius:34px;background:rgba(255,255,255,.77);box-shadow:0 30px 80px rgba(60,25,45,.15);border:1px solid rgba(255,255,255,.9)}
+.secret-lock{font-size:65px;display:block;animation:lockFloat 3s ease-in-out infinite}
+@keyframes lockFloat{50%{transform:translateY(-7px)}}
+.secret-card h2{font:700 46px "Dancing Script",cursive;color:#995069;margin-top:10px}
+.secret-card p{font-size:12px;line-height:1.8;color:#80616b;margin:10px 0 18px}
+.password-wrap{position:relative}
+.password{width:100%;padding:15px 46px 15px 16px;border:1px solid #e8c3ce;border-radius:15px;outline:none;text-align:center;background:#fff;transition:box-shadow .3s,border-color .3s}
+.password:focus{border-color:#c67890;box-shadow:0 0 0 4px rgba(198,120,144,.12)}
+.toggle-pass{position:absolute;right:9px;top:7px;width:34px;height:34px;border-radius:10px;background:#f8e2e8;color:#965069;cursor:pointer}
+.secret-error{min-height:20px;margin-top:10px;color:#a14e68;font-size:11px;font-weight:700}
+.secret-unlocked{display:none}
+.secret-unlocked.show{display:block;animation:reveal .9s var(--ease) both}
+@keyframes reveal{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+
+.gift-reveal{display:none;margin-top:24px;animation:reveal 1s var(--ease) both}
+.gift-reveal.show{display:block}
+.gift-title{font:700 43px "Dancing Script",cursive;color:#995069}
+.gift-sub{margin:8px auto 20px;max-width:550px;font:500 22px Caveat,cursive;line-height:1.4;color:#76515f}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:720px;margin:0 auto}
+.photo-card{position:relative;overflow:hidden;border-radius:26px;background:#fff;padding:7px;box-shadow:0 25px 65px rgba(45,18,35,.18);transform:translateY(20px);opacity:0}
+.gift-reveal.show .photo-card{animation:photoIn .9s var(--ease) forwards}
+.gift-reveal.show .photo-card:nth-child(2){animation-delay:.15s}
+@keyframes photoIn{to{transform:none;opacity:1}}
+.photo-card img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:20px}
+.photo-caption{padding:12px 8px 14px;font:600 22px Caveat,cursive;color:#965069}
+
+.happy-memory-wrap{margin-top:32px;padding:28px;border-radius:32px;background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,239,246,.72));border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow);overflow:hidden}
+.happy-memory-head{text-align:center;margin-bottom:20px}
+.happy-memory-head small{display:block;color:#b66a7e;font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:4px}
+.happy-memory-head h3{font:700 42px "Dancing Script",cursive;color:#995069}
+.happy-memory-head p{margin:5px auto 0;max-width:600px;color:#80616b;font-size:12px;line-height:1.7}
+.happy-memory-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.happy-memory-card{position:relative;overflow:hidden;border-radius:26px;background:#fff;padding:7px;box-shadow:0 22px 55px rgba(60,25,45,.16);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.happy-memory-card:hover{transform:translateY(-8px) rotate(.25deg);box-shadow:0 32px 75px rgba(60,25,45,.22)}
+.happy-memory-card img{display:block;width:100%;height:clamp(300px,48vw,520px);object-fit:cover;border-radius:20px}
+.happy-memory-card .memory-caption{padding:14px 12px 17px;text-align:left}
+.happy-memory-card .memory-caption strong{display:block;font:700 28px Caveat,cursive;color:#995069}
+.happy-memory-card .memory-caption span{display:block;margin-top:4px;color:#80616b;font-size:11px;line-height:1.65}
+.happy-memory-card .memory-badge{position:absolute;left:18px;top:18px;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);font-size:10px;font-weight:800;letter-spacing:1px;color:#965069;box-shadow:0 8px 25px rgba(40,20,30,.12)}
+
+/* =========================================================
+   APPLE-LEVEL TEXT MOTION LAYER
+========================================================= */
+
+.reveal-text{
+    opacity:0;
+    transform:translate3d(0,34px,0);
+    filter:blur(7px);
+    transition:
+        opacity .8s cubic-bezier(.22,1,.36,1),
+        transform .9s cubic-bezier(.22,1,.36,1),
+        filter .9s cubic-bezier(.22,1,.36,1);
+    will-change:transform,opacity,filter;
+}
+
+.reveal-text.revealed{
+    opacity:1;
+    transform:none;
+    filter:blur(0);
+}
+
+.reveal-up{
+    opacity:0;
+    transform:translate3d(0,48px,0) scale(.985);
+    transition:
+        opacity .9s cubic-bezier(.16,1,.3,1),
+        transform 1s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal-up.revealed{
+    opacity:1;
+    transform:none;
+}
+
+.reveal-down{
+    opacity:0;
+    transform:translate3d(0,-42px,0);
+    transition:
+        opacity .85s cubic-bezier(.22,1,.36,1),
+        transform .95s cubic-bezier(.22,1,.36,1);
+}
+
+.reveal-down.revealed{
+    opacity:1;
+    transform:none;
+}
+
+.reveal-scale{
+    opacity:0;
+    transform:scale(.88);
+    filter:blur(5px);
+    transition:
+        opacity .9s cubic-bezier(.16,1,.3,1),
+        transform 1s cubic-bezier(.16,1,.3,1),
+        filter 1s ease;
+}
+
+.reveal-scale.revealed{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+}
+
+.word-reveal{
+    display:inline-block;
+    overflow:hidden;
+    vertical-align:bottom;
+}
+
+.word-reveal > span{
+    display:inline-block;
+    transform:translateY(115%);
+    opacity:0;
+    transition:
+        transform .9s cubic-bezier(.16,1,.3,1),
+        opacity .8s ease;
+}
+
+.word-reveal.revealed > span{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.hero h1 .hero-line{
+    display:block;
+    overflow:hidden;
+    padding-bottom:.06em;
+}
+
+.hero h1 .hero-line > span{
+    display:inline-block;
+    transform:translateY(115%);
+    opacity:0;
+    filter:blur(4px);
+    animation:heroTextIn 1.15s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.hero h1 .hero-line:nth-child(2) > span{
+    animation-delay:.13s;
+}
+
+@keyframes heroTextIn{
+    0%{
+        transform:translateY(115%);
+        opacity:0;
+        filter:blur(5px);
+    }
+    70%{
+        filter:blur(0);
+    }
+    100%{
+        transform:translateY(0);
+        opacity:1;
+        filter:blur(0);
+    }
+}
+
+.heading h2{
+    overflow:hidden;
+}
+
+.heading h2 > span{
+    display:inline-block;
+    transform:translateY(105%);
+    opacity:0;
+    animation:headingIn .9s .12s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes headingIn{
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+.text-shimmer{
+    background:linear-gradient(
+        110deg,
+        currentColor 0%,
+        currentColor 40%,
+        rgba(255,255,255,.9) 50%,
+        currentColor 60%,
+        currentColor 100%
+    );
+    background-size:220% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:textShimmer 4.8s ease-in-out infinite;
+}
+
+@keyframes textShimmer{
+    0%,65%{background-position:220% 0}
+    100%{background-position:-20% 0}
+}
+
+.page.active .heading small{
+    animation:eyebrowIn .7s .05s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes eyebrowIn{
+    from{opacity:0;letter-spacing:7px;transform:translateY(10px)}
+    to{opacity:1;letter-spacing:3px;transform:none}
+}
+
+/* stagger content without making the page feel busy */
+.page.active .glass,
+.page.active .letter,
+.page.active .memory,
+.page.active .game{
+    animation:cardRise .85s cubic-bezier(.16,1,.3,1) both;
+}
+
+.page.active .glass:nth-child(2),
+.page.active .letter:nth-child(2),
+.page.active .memory:nth-child(2){animation-delay:.06s}
+.page.active .glass:nth-child(3),
+.page.active .letter:nth-child(3),
+.page.active .memory:nth-child(3){animation-delay:.12s}
+.page.active .letter:nth-child(4),
+.page.active .memory:nth-child(4){animation-delay:.18s}
+.page.active .letter:nth-child(5),
+.page.active .memory:nth-child(5){animation-delay:.24s}
+.page.active .letter:nth-child(6),
+.page.active .memory:nth-child(6){animation-delay:.30s}
+
+@keyframes cardRise{
+    from{
+        opacity:0;
+        transform:translateY(22px) scale(.985);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+    }
+    .reveal-text,.reveal-up,.reveal-down,.reveal-scale{
+        opacity:1 !important;
+        transform:none !important;
+        filter:none !important;
+    }
+}
+
+@media(max-width:850px){.happy-memory-grid{grid-template-columns:1fr}.happy-memory-wrap{padding:20px}.happy-memory-head h3{font-size:36px}}
+
+.modal{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:20px;background:rgba(45,21,35,.48);backdrop-filter:blur(16px);opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s}
+.modal.show{opacity:1;visibility:visible}
+.modal-box{width:min(610px,100%);max-height:88vh;overflow:auto;position:relative;padding:36px 27px;border-radius:32px;background:#fffaf8;box-shadow:0 40px 110px rgba(30,15,25,.3);transform:translateY(22px) scale(.95);transition:transform .5s var(--ease);text-align:center}
+.modal.show .modal-box{transform:none}
+.close{position:absolute;right:13px;top:13px;width:37px;height:37px;border-radius:50%;background:#f7dce4;color:#945067;cursor:pointer}
+.modal-icon{font-size:48px}.modal h2{margin-top:7px;font:700 44px "Dancing Script",cursive;color:#995069}.modal p{margin-top:18px;font:500 25px/1.55 Caveat,cursive;color:#694851}
+
+.toast{position:fixed;z-index:8000;left:50%;bottom:24px;padding:12px 18px;border-radius:999px;color:white;background:rgba(65,38,48,.92);font-size:11px;opacity:0;pointer-events:none;transform:translate(-50%,90px);transition:.4s var(--ease)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:9999}
+
+@media(max-width:850px){
+  .logo{display:none}.nav{justify-content:center}
+  .cards,.letter-grid,.memory-grid{grid-template-columns:repeat(2,1fr)}
+  .floating{right:0}
+}
+@media(max-width:600px){
+  .app{width:94%}.nav{position:relative;top:0}
+  .hero{min-height:610px}.hero h1{font-size:72px}.floating{display:none}
+  .cards,.letter-grid,.memory-grid{grid-template-columns:1fr}
+  .heading h2{font-size:45px}
+  .heart-grid{grid-template-columns:repeat(4,1fr)}
+  .music-player{flex-direction:column;text-align:center}.music-info{width:100%}.controls{justify-content:center}
+  .target-area{height:300px}.photo-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+
+/* Image reliability */
+img{max-width:100%;height:auto;}
+.photo-card img,.happy-memory-card img{background:linear-gradient(135deg,#f6d6e0,#fff1f5);}
+.photo-card img{min-height:260px;}
+.image-note{margin-top:10px;font-size:10px;color:#a16a7b;}
+
+/* ================= GIRLFRIEND'S DAY REDESIGN ================= */
+:root{--gd-ink:#24171d;--gd-rose:#d84f78;--gd-deep:#8f294f;--gd-cream:#fffaf4;--gd-blush:#ffe0e9;--gd-gold:#d7a56d}
+body{background:radial-gradient(circle at 8% 5%,#ffd0df 0 9%,transparent 27%),radial-gradient(circle at 92% 16%,#ffe7c9 0 8%,transparent 26%),linear-gradient(135deg,#fffaf7,#fff0f5 50%,#fff9f0);color:var(--gd-ink)}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:linear-gradient(115deg,transparent 0 48%,rgba(255,255,255,.38) 49%,transparent 52%);background-size:340px 340px;opacity:.45}
+.nav{border-radius:999px!important;background:rgba(255,255,255,.7)!important;box-shadow:0 20px 60px rgba(75,27,48,.1)!important;border:1px solid rgba(255,255,255,.9)!important}
+.logo{font-size:24px!important;color:var(--gd-deep)!important}
+.hero{min-height:760px!important;overflow:hidden}
+.hero:before{content:"";position:absolute;width:540px;height:540px;border-radius:50%;border:1px solid rgba(216,79,120,.13);box-shadow:0 0 0 70px rgba(216,79,120,.035),0 0 0 140px rgba(216,79,120,.025);left:50%;top:50%;transform:translate(-50%,-50%);animation:gdOrbit 16s linear infinite;pointer-events:none}
+.hero:after{content:"♡";position:absolute;left:50%;top:50%;font-size:340px;color:rgba(216,79,120,.045);transform:translate(-50%,-48%);font-family:Georgia,serif;pointer-events:none}
+@keyframes gdOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hero-inner{position:relative;z-index:2}
+.eyebrow{letter-spacing:4px!important;color:#b25b76!important}
+.hero h1{font-size:clamp(72px,13vw,145px)!important;letter-spacing:-7px!important;line-height:.78!important;text-shadow:0 20px 60px rgba(150,46,82,.1)}
+.hero h1 span{background:linear-gradient(90deg,#9a3154,#ed7898,#9a3154);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gdShine 5s linear infinite}
+@keyframes gdShine{to{background-position:200% center}}
+.hero p{font-size:15px!important;max-width:650px!important}
+.btn{position:relative;overflow:hidden}
+.btn:after{content:"";position:absolute;inset:-60% -20%;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.6),transparent 65%);transform:translateX(-100%);transition:.7s}
+.btn:hover:after{transform:translateX(100%)}
+.primary{background:linear-gradient(135deg,#a83259,#dd6588)!important;box-shadow:0 16px 35px rgba(169,52,91,.25)!important}
+.section{padding:75px 0!important}
+.heading h2{font-size:clamp(48px,7vw,78px)!important;letter-spacing:-2px}
+.glass,.letter,.game,.music-player,.secret-card,.reason,.memory{box-shadow:0 30px 80px rgba(80,30,50,.09)!important;border:1px solid rgba(255,255,255,.9)!important}
+.letter-grid{gap:18px!important}
+.letter{background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(255,238,244,.9))!important;position:relative;overflow:hidden}
+.letter:before{content:"";position:absolute;width:130px;height:130px;border-radius:50%;background:#ffd8e4;right:-60px;top:-60px;opacity:.55}
+.letter h3{position:relative;z-index:1}
+.memory{background:linear-gradient(145deg,#fff,#fff0e5)!important}
+.game{background:rgba(255,255,255,.78)!important}
+.reason{background:linear-gradient(145deg,#fffdf9,#fff0f5)!important}
+.reason-text{font-size:clamp(42px,6vw,70px)!important}
+.star-room{border:1px solid rgba(255,255,255,.1);position:relative}
+.secret-card{background:rgba(255,255,255,.8)!important}
+.modal-box{border:1px solid rgba(255,255,255,.9);box-shadow:0 45px 120px rgba(35,12,25,.35)!important}
+/* text entrance */
+.page.active .heading,.page.active .hero-inner,.page.active .glass,.page.active .letter,.page.active .memory,.page.active .game,.page.active .reason{animation:gdTextIn .75s cubic-bezier(.2,.8,.2,1) both}
+@keyframes gdTextIn{from{opacity:0;transform:translateY(28px);filter:blur(7px)}to{opacity:1;transform:none;filter:none}}
+@media(max-width:600px){.hero{min-height:650px!important}.hero h1{font-size:72px!important;letter-spacing:-4px!important}.hero:before{width:330px;height:330px}.hero:after{font-size:220px}}
+</style>
+
+<style id="godly-upgrade">
+:root{
+  --ink:#2b1723; --rose:#ff7fa2; --rose2:#ffb6c9; --cream:#fff8f4;
+  --glass:rgba(255,255,255,.58); --line:rgba(255,255,255,.72);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+body{
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,185,207,.55),transparent 28%),
+    radial-gradient(circle at 90% 85%,rgba(255,221,196,.52),transparent 30%),
+    linear-gradient(135deg,#f7dce5 0%,#fff3ed 48%,#efd5e2 100%);
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9997;opacity:.22;
+  background-image:radial-gradient(rgba(100,50,70,.22) .6px,transparent .6px);
+  background-size:5px 5px;mix-blend-mode:multiply;
+}
+#godlyCanvas{position:fixed;inset:0;z-index:-2;pointer-events:none}
+#cursorGlow{
+  position:fixed;width:260px;height:260px;border-radius:50%;pointer-events:none;z-index:9996;
+  background:radial-gradient(circle,rgba(255,131,167,.20),rgba(255,131,167,0) 68%);
+  transform:translate(-50%,-50%);mix-blend-mode:multiply;opacity:0;transition:opacity .35s ease;
+}
+#scrollProgress{
+  position:fixed;left:0;top:0;width:0;height:3px;z-index:10001;
+  background:linear-gradient(90deg,#a84f70,#ff87a8,#ffd0b8);
+  box-shadow:0 0 18px rgba(255,111,151,.65);
+}
+.nav{box-shadow:0 18px 60px rgba(75,31,51,.13)!important;border-color:rgba(255,255,255,.92)!important}
+.tab,.btn,.letter,.memory,.glass,.game,.music-player,.secret-card{
+  will-change:transform;
+}
+.btn.primary{
+  background:linear-gradient(135deg,#9b4765,#d06b88 55%,#a84d6e);
+  box-shadow:0 14px 35px rgba(168,77,110,.25),inset 0 1px rgba(255,255,255,.3);
+}
+.btn.primary::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.28) 48%,transparent 75%);
+  transform:translateX(-130%);transition:transform .8s var(--ease);
+}
+.btn{position:relative;overflow:hidden}
+.btn.primary:hover::after{transform:translateX(130%)}
+.hero-inner{position:relative}
+.hero h1{text-shadow:0 10px 40px rgba(143,62,92,.12)}
+.hero h1 span{background:linear-gradient(90deg,#9b4765,#df7d9b,#a84f70);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{letter-spacing:5px}
+.glass,.letter,.memory,.game,.music-player,.secret-card{
+  transition:transform .55s var(--ease),box-shadow .55s var(--ease),border-color .55s ease;
+}
+.glass:hover,.letter:hover,.memory:hover,.game:hover{
+  box-shadow:0 28px 70px rgba(82,39,57,.14);
+}
+.section{position:relative}
+.heading h2{letter-spacing:-1px}
+.happy-memory-wrap{
+  margin-top:30px;padding:32px;border-radius:34px;
+  background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,239,244,.72));
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 30px 80px rgba(85,40,58,.10);
+}
+.happy-memory-head h3{font:700 42px "Dancing Script",cursive;color:#995069;margin:3px 0}
+.happy-memory-head p{max-width:700px;font-size:12px;line-height:1.8;color:#80616b}
+.happy-memory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:20px}
+.happy-memory-card{
+  position:relative;overflow:hidden;border-radius:26px;background:#fff;
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 20px 55px rgba(75,35,52,.11);
+  cursor:zoom-in;transform:translateZ(0);
+}
+.happy-memory-card img{display:block;width:100%;height:360px;object-fit:cover;transition:transform .9s var(--ease),filter .9s ease}
+.happy-memory-card:hover img{transform:scale(1.045);filter:saturate(1.06) contrast(1.02)}
+.memory-badge{
+  position:absolute;left:14px;top:14px;z-index:2;padding:8px 11px;border-radius:999px;
+  background:rgba(255,255,255,.78);backdrop-filter:blur(12px);font-size:9px;font-weight:800;
+  color:#8d4d64;letter-spacing:1px;text-transform:uppercase;
+}
+.photo-caption{padding:16px 17px;font-family:Caveat,cursive;font-size:22px;color:#8f4d64;background:#fffaf9}
+#cinematicIntro{
+  position:fixed;inset:0;z-index:12000;display:grid;place-items:center;padding:24px;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(255,178,203,.20),transparent 30%),
+    linear-gradient(135deg,#170e1d,#2b1728 55%,#130d18);
+  transition:opacity .9s var(--ease),visibility .9s;
+}
+#cinematicIntro.hide{opacity:0;visibility:hidden;pointer-events:none}
+.intro-card{text-align:center;color:#fff;max-width:720px}
+.intro-kicker{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#ffb8ca;font-weight:800}
+.intro-title{font:700 clamp(65px,13vw,135px)/.8 "Dancing Script",cursive;margin:18px 0 25px;
+  background:linear-gradient(90deg,#fff,#ffb2c7,#fff0f4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.intro-copy{max-width:560px;margin:auto;color:rgba(255,255,255,.72);line-height:1.8;font-size:13px}
+.intro-enter{
+  margin-top:28px;border:1px solid rgba(255,255,255,.25);color:#fff;background:rgba(255,255,255,.08);
+  padding:15px 24px;border-radius:999px;cursor:pointer;backdrop-filter:blur(16px);
+  box-shadow:0 15px 50px rgba(0,0,0,.22);transition:.35s var(--ease)
+}
+.intro-enter:hover{transform:translateY(-4px) scale(1.02);background:rgba(255,255,255,.14)}
+.intro-orbit{width:120px;height:120px;margin:0 auto 18px;border-radius:50%;position:relative}
+.intro-orbit::before,.intro-orbit::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,182,204,.3);border-radius:50%;animation:orbit 5s linear infinite}
+.intro-orbit::after{transform:rotate(60deg) scale(.78);animation-duration:3.7s}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.photo-lightbox{
+  position:fixed;inset:0;z-index:11000;display:grid;place-items:center;padding:18px;
+  background:rgba(18,9,18,.72);backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:.4s ease;
+}
+.photo-lightbox.show{opacity:1;visibility:visible}
+.photo-lightbox img{max-width:min(1100px,94vw);max-height:88vh;object-fit:contain;border-radius:22px;
+  box-shadow:0 40px 120px rgba(0,0,0,.45);transform:scale(.94);transition:.5s var(--ease)}
+.photo-lightbox.show img{transform:scale(1)}
+.photo-close{position:absolute;right:22px;top:18px;width:44px;height:44px;border:0;border-radius:50%;
+  background:rgba(255,255,255,.14);color:#fff;font-size:24px;cursor:pointer}
+.reveal-photo{animation:photoReveal 1.1s var(--ease) both}
+@keyframes photoReveal{from{opacity:0;transform:scale(.88) translateY(25px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@media(max-width:650px){
+  .happy-memory-grid{grid-template-columns:1fr}
+  .happy-memory-card img{height:300px}
+  .happy-memory-wrap{padding:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="scrollProgress"></div>
+<canvas id="godlyCanvas" aria-hidden="true"></canvas>
+<div id="cursorGlow" aria-hidden="true"></div>
+
+<div id="cinematicIntro">
+  <div class="intro-card">
+    <div class="intro-orbit">💗</div>
+    <div class="intro-kicker">a tiny universe · made for you</div>
+    <div class="intro-title">for you.</div>
+    <p class="intro-copy">A little corner of the internet made from memories, tiny games, moonlight, soft words and all the little things that deserve to be remembered.</p>
+    <button class="intro-enter" id="enterUniverse">enter my little universe&nbsp; →</button>
+  </div>
+</div>
+
+<div class="bg-orb orb-a"></div><div class="bg-orb orb-b"></div><div class="noise"></div>
+<div id="particles"></div>
+
+<div class="app">
+<nav class="nav">
+  <button class="logo" id="logo">Happy Girlfriend's Day ♡</button>
+  <div class="tabs">
+    <button class="tab active" data-page="home">home</button>
+    <button class="tab" data-page="letters">letters</button>
+    <button class="tab" data-page="memories">memories</button>
+    <button class="tab" data-page="games">games</button>
+    <button class="tab" data-page="love">love</button>
+    <button class="tab" data-page="stars">stars</button>
+    <button class="tab" data-page="music">music</button>
+    <button class="tab" data-page="secret">secret</button>
+  </div>
+</nav>
+
+<section class="page active" id="home">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow reveal-down">a tiny celebration of you</div>
+      <h1>Happy<br><span>Girlfriend's Day.</span></h1>
+      <p>This isn't just another webpage. It's a little universe made for one very special person — filled with letters, games, stars, secrets and a gift waiting at the end.</p>
+      <div class="hero-buttons">
+        <button class="btn primary" data-go="letters">open your letter ♡</button>
+        <button class="btn secondary" data-go="games">play with me</button>
+      </div>
+    </div>
+    <div class="floating">🌙</div>
+  </div>
+  <div class="section">
+    <div class="heading"><small class="reveal-down">before you continue</small><h2><span>three little reminders.</span></h2></div>
+    <div class="cards">
+      <div class="glass"><div class="icon">🌷</div><h3>you matter</h3><p>Probably much more than you realize. Never underestimate the effect your presence has.</p></div>
+      <div class="glass"><div class="icon">🌙</div><h3>look at the moon</h3><p>If you ever miss me, look up. Maybe we're looking at the same moon.</p></div>
+      <div class="glass"><div class="icon">🎀</div><h3>this is yours</h3><p>Every little button, animation and secret here was made to give you somewhere to smile.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="letters">
+  <div class="section">
+    <div class="heading"><small class="reveal-down">open carefully</small><h2><span>open when...</span></h2></div>
+    <div class="letter-grid">
+      <div class="letter" data-icon="💌" data-title="you miss me" data-message="If you opened this because you miss me, pause for a second. Imagine me beside you, annoying you, making you laugh and refusing to leave. Distance can separate two people, but it cannot erase what they mean to each other. So smile, okay? Somewhere out there, I'm thinking about you too."><div class="icon">💌</div><h3>you miss me</h3><p>for when distance feels too big.</p></div>
+      <div class="letter" data-icon="🌷" data-title="you're sad" data-message="You don't have to be okay every second. Rest. Cry. Be quiet. Take your time. You're allowed to have difficult days. Just promise me you'll be gentle with yourself while you get through them."><div class="icon">🌷</div><h3>you're sad</h3><p>a tiny hug hidden inside words.</p></div>
+      <div class="letter" data-icon="🐱" data-title="you need a laugh" data-message="Emergency announcement: you are officially required to smile. I have checked the extremely legitimate rulebook and apparently being this cute while being grumpy is illegal. Please cooperate."><div class="icon">🐱</div><h3>you need a laugh</h3><p>seriousness has been banned.</p></div>
+      <div class="letter" data-icon="🌙" data-title="you feel alone" data-message="Look at the sky. The same moon above you exists somewhere above me too. We may not be standing beside each other, but we're still under the same enormous sky. You are not forgotten."><div class="icon">🌙</div><h3>you feel alone</h3><p>for those quiet nights.</p></div>
+      <div class="letter" data-icon="⭐" data-title="you can't sleep" data-message="You don't have to solve tomorrow tonight. Breathe slowly. Let your thoughts become little stars and let them drift away. Tomorrow can wait. Rest first."><div class="icon">⭐</div><h3>you can't sleep</h3><p>midnight edition.</p></div>
+      <div class="letter" data-icon="🧸" data-title="you need love" data-message="Come here. No explanations. No pretending. Just imagine the longest, warmest hug. You deserve tenderness, patience and reassurance. You deserve to feel safe being completely yourself."><div class="icon">🧸</div><h3>you need love</h3><p>no questions asked.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="memories">
+  <div class="section">
+    <div class="heading"><small class="reveal-down">our little scrapbook</small><h2><span>memories ♡</span></h2></div>
+    <div class="memory-grid">
+      <div class="memory" data-icon="🌸" data-title="the beginning" data-message="I love how something so simple can become so important. Somehow, you became one of the happiest parts of my days."><span>🌸</span><h3>the beginning</h3><p>a little moment that started something beautiful ♡</p></div>
+      <div class="memory" data-icon="📸" data-title="that smile" data-message="Your smile has this quiet way of making everything around it feel softer. I hope you never forget how beautiful it is."><span>📸</span><h3>that smile</h3><p>the kind of smile I could never get tired of</p></div>
+      <div class="memory" data-icon="🌙" data-title="our little world" data-message="The little conversations, silly moments, random messages and quiet nights are the pieces that make our own tiny world feel real."><span>🌙</span><h3>our little world</h3><p>made from tiny moments and a lot of love</p></div>
+      <div class="memory" data-icon="☁️" data-title="one day" data-message="I hope one day we look back at these moments and realize how many beautiful memories we made without even noticing."><span>☁️</span><h3>one day</h3><p>for all the moments still waiting for us</p></div>
+      <div class="memory" data-icon="💞" data-title="you + me" data-message="Different places, different days, different little lives — and still somehow we found each other. That means something to me."><span>💞</span><h3>you + me</h3><p>two hearts making one very sweet little story</p></div>
+      <div class="memory" data-icon="🎀" data-title="forever folder" data-message="If I could save every laugh, every sweet message and every little moment that made me smile, I would keep this folder forever."><span>🎀</span><h3>forever folder</h3><p>for the moments I never want to lose</p></div>
+    </div>
+
+    <div class="happy-memory-wrap">
+      <div class="happy-memory-head">
+        <small>saved forever</small>
+        <h3>happy memories 💗</h3>
+        <p>Some moments are small on a screen but enormous in the heart. I kept these here because they are the kind of memories I would happily replay a thousand times.</p>
+      </div>
+      <div class="happy-memory-grid">
+        <article class="happy-memory-card">
+          <div class="memory-badge">memory 01 · happy tears</div>
+          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=85" alt="couple memory">
+          <div class="memory-caption">
+            <strong>“I got tears in my eyes” 😭🌷</strong>
+            <span>The kind of tiny conversation that somehow becomes a huge memory. Your “LOVE YOU” at the end belongs here forever.</span>
+          </div>
+        </article>
+        <article class="happy-memory-card">
+          <div class="memory-badge">memory 02 · you loved it</div>
+          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=85" alt="couple memory">
+          <div class="memory-caption">
+            <strong>“I LOVE IT” 💗💗💗💗</strong>
+            <span>That moment when you said it was so good and I still wished I had more time to make it even better.</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="games">
+  <div class="section">
+    <div class="heading"><small class="reveal-down">okay, let's play</small><h2><span>the little arcade 🎮</span></h2></div>
+    <div class="game">
+      <h3>heart hunt</h3><p class="game-desc">Find the hidden heart. Three rounds. It gets harder.</p>
+      <div class="game-status"><div class="stat">round: <span id="huntRound">1</span>/3</div><div class="stat">score: <span id="huntScore">0</span></div><div class="stat">lives: <span id="huntLives">3</span></div></div>
+      <div class="heart-grid" id="heartGrid"></div><p id="huntMessage" class="game-desc"></p><br><button class="btn secondary" id="restartHunt">restart game</button>
+    </div>
+    <div class="game">
+      <h3>memory garden</h3><p class="game-desc">Remember the pairs. Each level adds more cards.</p>
+      <div class="game-status"><div class="stat">level: <span id="memoryLevel">1</span></div><div class="stat">moves: <span id="memoryMoves">0</span></div></div>
+      <div class="memory-board" id="memoryBoard"></div><p id="memoryMessage" class="game-desc"></p><br><button class="btn secondary" id="restartMemory">restart level</button>
+    </div>
+    <div class="game">
+      <h3>catch my heart</h3><p class="game-desc">Catch the heart before time runs out.</p>
+      <div class="game-status"><div class="stat">score: <span id="catchScore">0</span></div><div class="stat">time: <span id="catchTime">20</span>s</div></div>
+      <div class="target-area" id="targetArea"><button class="target-heart" id="targetHeart">💗</button></div>
+      <button class="btn primary" id="startCatch">start challenge</button>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="love">
+  <div class="section">
+    <div class="heading"><small class="reveal-down">press whenever you want</small><h2><span>reasons ♡</span></h2></div>
+    <div class="reason"><div class="reason-label" id="reasonLabel">reason 01</div><div class="reason-text" id="reasonText">Because somehow you make ordinary moments feel like memories.</div><button class="btn primary" id="reasonButton">give me another</button></div>
+    <div class="meter-box"><h3 style="font:600 34px 'Dancing Script',cursive;color:#995069">how much love is in here?</h3><div class="meter-track"><div class="meter-fill" id="meterFill"></div></div><p id="meterText" style="font-size:12px">tap the button and find out.</p><br><button class="btn primary" id="meterButton">measure it ♡</button></div>
+  </div>
+</section>
+
+<section class="page" id="stars">
+  <div class="section">
+    <div class="heading"><small class="reveal-down">something different</small><h2><span>the night sky 🌙</span></h2></div>
+    <div class="star-room" id="starRoom"><div class="star-message"><p id="starMessage">Click a star.<br>There are little messages hidden in the sky.</p></div></div>
+  </div>
+</section>
+
+<section class="page" id="music">
+  <div class="section">
+    <div class="heading"><small class="reveal-down">our soundtrack</small><h2><span>music ♡</span></h2></div>
+    <div class="music-player">
+      <div class="album" id="album">💗</div>
+      <div class="music-info"><small>playing for you</small><h3>our little song</h3><div class="progress"><div class="progress-fill" id="musicProgress"></div></div><div class="controls"><button class="music-btn" id="back">↶</button><button class="music-btn" id="play">▶</button><button class="music-btn" id="forward">↷</button></div></div>
+    </div>
+    <div class="glass" style="margin-top:16px"><div class="icon">🎧</div><h3>make this yours</h3><p>This visual player is ready for a real song later. You can add an audio file without changing the rest of the site.</p></div>
+  </div>
+</section>
+
+<section class="page" id="secret">
+  <div class="section">
+    <div class="heading"><small>the last door</small><h2><span>something is waiting.</span></h2></div>
+    <div class="secret-shell">
+      <div>
+        <div class="secret-card" id="secretLocked">
+          <span class="secret-lock">🔐</span>
+          <h2><span>secret room</span></h2>
+          <p>There is something hidden here.<br>Only one little name opens it. ♡</p>
+          <div class="password-wrap">
+            <input id="password" class="password" type="password" placeholder="enter the password" autocomplete="off" aria-label="Secret password">
+            <button class="toggle-pass" id="togglePass" type="button" aria-label="Show password">◉</button>
+          </div>
+          <div class="secret-error" id="secretError"></div>
+          <button class="btn primary" id="unlock" type="button">unlock ♡</button>
+        </div>
+
+        <div class="secret-card secret-unlocked" id="secretUnlocked">
+          <div style="font-size:65px">💗</div>
+          <h2><span>you found it.</span></h2>
+          <p>You got it — the password was <b>you</b>.<br><br>But the password wasn't really the gift.<br>The gift was waiting behind it.</p>
+          <button class="btn primary" id="revealGift">open your gift ✨</button>
+        </div>
+
+        <div class="gift-reveal" id="giftReveal">
+          <div class="gift-title">for the girl behind the password ♡</div>
+          <div class="gift-sub">Two little pieces of you, saved here like photographs from a universe I never want to forget.</div>
+          <div class="photo-grid">
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=85" alt="couple memory"><div class="photo-caption">the kind of smile the stars would keep ✨</div></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=85" alt="couple memory"><div class="photo-caption">a little piece of my favorite universe 🌙</div></div>
+          </div>
+          <br>
+          <button class="btn primary" id="finalSecret">one final thing 🌌</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="close" id="closeModal" type="button">×</button>
+    <div class="modal-icon" id="modalIcon">♡</div>
+    <h2 id="modalTitle">hello</h2>
+    <p id="modalText"></p><br>
+    <button class="btn primary" id="modalHeart" type="button">♡ send love</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+const pages = $$(".page");
+const tabs = $$(".tab");
+
+function go(page){
+  const target = document.getElementById(page);
+  if(!target) return;
+  pages.forEach(p=>p.classList.remove("active"));
+  tabs.forEach(t=>t.classList.remove("active"));
+  target.classList.add("active");
+  const tab = document.querySelector(`[data-page="${page}"]`);
+  if(tab) tab.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+tabs.forEach(tab=>tab.addEventListener("click",()=>go(tab.dataset.page)));
+$$("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+
+/* Modal */
+const modal=$("#modal"), modalIcon=$("#modalIcon"), modalTitle=$("#modalTitle"), modalText=$("#modalText");
+function openModal(icon,title,text){
+  modalIcon.textContent=icon; modalTitle.textContent=title; modalText.textContent=text;
+  modal.classList.add("show"); document.body.classList.add("modal-open");
+}
+function closeModal(){modal.classList.remove("show");document.body.classList.remove("modal-open")}
+$("#closeModal").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+$$(".letter,.memory").forEach(card=>card.addEventListener("click",()=>openModal(card.dataset.icon,card.dataset.title,card.dataset.message)));
+
+/* Smooth hearts */
+function burst(x=innerWidth/2,y=innerHeight/2){
+  const container=$("#particles");
+  const symbols=["♡","♥","💗","💕","✨","🌸"];
+  for(let i=0;i<22;i++){
+    const el=document.createElement("div");
+    el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    Object.assign(el.style,{position:"fixed",left:x+"px",top:y+"px",fontSize:(12+Math.random()*18)+"px"});
+    container.appendChild(el);
+    const angle=Math.random()*Math.PI*2, distance=70+Math.random()*230;
+    const dx=Math.cos(angle)*distance, dy=Math.sin(angle)*distance;
+    const a=el.animate([
+      {transform:"translate(-50%,-50%) scale(.2)",opacity:1},
+      {transform:`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px)) scale(1.05)`,opacity:0}
+    ],{duration:800+Math.random()*600,easing:"cubic-bezier(.2,.8,.2,1)"});
+    a.onfinish=()=>el.remove();
+  }
+}
+document.addEventListener("click",e=>{if(e.target.closest(".primary"))burst(e.clientX,e.clientY)});
+
+/* Reasons */
+const reasons=[
+"Because somehow you make ordinary moments feel like memories.",
+"Because your smile can make an ordinary day feel softer.",
+"Because you are somehow both my peace and my favorite chaos.",
+"Because talking to you never feels like enough time.",
+"Because there is something about you words never quite explain.",
+"Because even your smallest habits become adorable when they're yours.",
+"Because you make the world feel a little less ordinary.",
+"Because there is nobody quite like you.",
+"Because sometimes I look at you and wonder how someone can be this lovely.",
+"Because if I had to choose one person to annoy forever, I'd choose you.",
+"Because you make my heart do things logic cannot explain.",
+"Because being around you feels like finding a favorite song.",
+"Because somehow, out of everyone, you became my favorite.",
+"Because you're you. Somehow that's enough."
+];
+let reasonIndex=0;
+$("#reasonButton").addEventListener("click",()=>{
+  reasonIndex=(reasonIndex+1)%reasons.length;
+  $("#reasonText").textContent=reasons[reasonIndex];
+  $("#reasonLabel").textContent="reason "+String(reasonIndex+1).padStart(2,"0");
+});
+
+/* Meter */
+let meter=0;
+$("#meterButton").addEventListener("click",()=>{
+  meter=Math.min(100,meter+Math.floor(Math.random()*15)+7);
+  $("#meterFill").style.width=meter+"%";
+  $("#meterText").textContent=meter<30?"warming up... ♡":meter<60?"okay, this is getting serious.":meter<85?"the meter is struggling.":meter<100?"this thing was NOT designed for this much love.":"ERROR: love exceeded maximum capacity 💗";
+});
+
+/* Heart hunt */
+const heartGrid=$("#heartGrid");
+let huntRound=1,huntScore=0,huntLives=3,huntLocked=false;
+function startHunt(){
+  heartGrid.innerHTML=""; huntLocked=false;
+  const count=12+(huntRound-1)*6, secret=Math.floor(Math.random()*count);
+  heartGrid.style.gridTemplateColumns="repeat(6,1fr)";
+  for(let i=0;i<count;i++){
+    const b=document.createElement("button"); b.className="hunt-heart"; b.textContent="♡";
+    b.addEventListener("click",()=>{
+      if(huntLocked)return;
+      if(i===secret){
+        huntLocked=true;b.classList.add("correct");b.textContent="💗";huntScore+=100*huntRound;$("#huntScore").textContent=huntScore;
+        if(huntRound<3){$("#huntMessage").textContent="You found it! Round "+huntRound+" complete.";setTimeout(()=>{huntRound++;$("#huntRound").textContent=huntRound;startHunt()},800)}
+        else{$("#huntMessage").textContent="YOU WON THE WHOLE THING 💗 Score: "+huntScore;burst()}
+      }else{
+        b.classList.add("wrong");huntLives--;$("#huntLives").textContent=huntLives;
+        if(huntLives<=0){huntLocked=true;$("#huntMessage").textContent="The hearts defeated you 😭 Try again."}
+      }
+    });
+    heartGrid.appendChild(b);
+  }
+}
+$("#restartHunt").addEventListener("click",()=>{huntRound=1;huntScore=0;huntLives=3;$("#huntRound").textContent=1;$("#huntScore").textContent=0;$("#huntLives").textContent=3;$("#huntMessage").textContent="";startHunt()});
+startHunt();
+
+/* Memory */
+const memoryBoard=$("#memoryBoard"), memorySymbols=["🌸","🌙","💗","🎀","⭐","🧸","🍓","🦋"];
+let memoryLevel=1,memoryFirst=null,memorySecond=null,memoryLock=false,memoryMoves=0,memoryMatched=0;
+function setupMemory(){
+  memoryBoard.innerHTML="";memoryFirst=null;memorySecond=null;memoryLock=false;memoryMoves=0;memoryMatched=0;$("#memoryMoves").textContent=0;$("#memoryMessage").textContent="";
+  const pairs=Math.min(4+memoryLevel,memorySymbols.length);
+  const cards=[...memorySymbols.slice(0,pairs),...memorySymbols.slice(0,pairs)].sort(()=>Math.random()-.5);
+  cards.forEach(symbol=>{
+    const card=document.createElement("button");card.className="memory-tile";card.textContent=symbol;card.dataset.symbol=symbol;
+    card.addEventListener("click",()=>flipMemory(card));memoryBoard.appendChild(card);
+  });
+}
+function flipMemory(card){
+  if(memoryLock||card.classList.contains("revealed")||card.classList.contains("matched"))return;
+  card.classList.add("revealed");
+  if(!memoryFirst){memoryFirst=card;return}
+  memorySecond=card;memoryMoves++;$("#memoryMoves").textContent=memoryMoves;
+  if(memoryFirst.dataset.symbol===memorySecond.dataset.symbol){
+    memoryFirst.classList.add("matched");memorySecond.classList.add("matched");memoryMatched+=2;memoryFirst=null;memorySecond=null;
+    if(memoryMatched===memoryBoard.children.length){
+      if(memoryLevel<4){$("#memoryMessage").textContent="Level complete! Next level incoming...";setTimeout(()=>{memoryLevel++;$("#memoryLevel").textContent=memoryLevel;setupMemory()},850)}
+      else{$("#memoryMessage").textContent="YOU BEAT THE MEMORY GARDEN 🏆💗";burst()}
+    }
+  }else{
+    memoryLock=true;setTimeout(()=>{memoryFirst.classList.remove("revealed");memorySecond.classList.remove("revealed");memoryFirst=null;memorySecond=null;memoryLock=false},650)
+  }
+}
+$("#restartMemory").addEventListener("click",setupMemory);setupMemory();
+
+/* Catch */
+const targetArea=$("#targetArea"),targetHeart=$("#targetHeart");let catchScore=0,catchTime=20,catchTimer=null,catchActive=false;
+function moveTarget(){
+  const maxX=Math.max(0,targetArea.clientWidth-targetHeart.offsetWidth),maxY=Math.max(0,targetArea.clientHeight-targetHeart.offsetHeight);
+  targetHeart.style.left=Math.random()*maxX+"px";targetHeart.style.top=Math.random()*maxY+"px";
+}
+targetHeart.addEventListener("click",()=>{
+  if(!catchActive)return;catchScore++;$("#catchScore").textContent=catchScore;moveTarget();
+});
+function startCatch(){
+  clearInterval(catchTimer);catchScore=0;catchTime=20;catchActive=true;$("#catchScore").textContent=0;$("#catchTime").textContent=20;$("#startCatch").textContent="playing...";moveTarget();
+  catchTimer=setInterval(()=>{catchTime--;$("#catchTime").textContent=catchTime;if(catchTime<=0){clearInterval(catchTimer);catchActive=false;$("#startCatch").textContent="play again";showToast("You caught "+catchScore+" hearts 💗")}},1000)
+}
+$("#startCatch").addEventListener("click",startCatch);addEventListener("resize",()=>{if(catchActive)moveTarget()});
+
+/* Stars */
+const starRoom=$("#starRoom");
+const starMessages=[
+"Somewhere under this sky, someone is thinking about you. ♡",
+"If the stars could write, they'd probably write your name.",
+"You make ordinary moments feel strangely magical.",
+"Maybe the universe knew what it was doing when it let our paths cross.",
+"You're someone's favorite person. Never forget that.",
+"Even the moon would be jealous of your glow.",
+"Close your eyes. Make a wish. Maybe this page is listening.",
+"Somewhere between all the stars, there's a tiny place that feels like home."
+];
+for(let i=0;i<35;i++){
+  const star=document.createElement("div");star.className="star";star.textContent=Math.random()>.7?"✦":"·";
+  star.style.left=Math.random()*96+"%";star.style.top=Math.random()*94+"%";star.style.fontSize=8+Math.random()*17+"px";star.style.animationDelay=Math.random()*2+"s";
+  star.addEventListener("click",()=>{$("#starMessage").textContent=starMessages[Math.floor(Math.random()*starMessages.length)];burst(star.getBoundingClientRect().left,star.getBoundingClientRect().top)});
+  starRoom.appendChild(star);
+}
+
+/* Music visualizer */
+let playing=false,progress=0,musicTimer=null;
+$("#play").addEventListener("click",()=>{
+  playing=!playing;$("#play").textContent=playing?"Ⅱ":"▶";$("#album").classList.toggle("playing",playing);clearInterval(musicTimer);
+  if(playing)musicTimer=setInterval(()=>{progress+=.35;if(progress>=100)progress=0;$("#musicProgress").style.width=progress+"%"},100);
+});
+$("#back").addEventListener("click",()=>{progress=Math.max(0,progress-10);$("#musicProgress").style.width=progress+"%"});
+$("#forward").addEventListener("click",()=>{progress=Math.min(100,progress+10);$("#musicProgress").style.width=progress+"%"});
+
+/* Secret — intentionally robust: trims spaces, ignores case, handles Enter, and gives feedback */
+const password=$("#password"),secretError=$("#secretError");
+function unlock(){
+  const value=password.value.normalize("NFKC").trim().toLowerCase();
+  if(value==="you"){
+    $("#secretLocked").style.display="none";
+    $("#secretUnlocked").classList.add("show");
+    secretError.textContent="";
+    burst();
+  }else{
+    password.value="";
+    secretError.textContent="That isn't it yet ♡ Try the name written on this little universe.";
+    password.focus();
+    password.animate([{transform:"translateX(-5px)"},{transform:"translateX(5px)"},{transform:"translateX(0)"}],{duration:280});
+  }
+}
+$("#unlock").addEventListener("click",unlock);
+password.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();unlock()}});
+$("#togglePass").addEventListener("click",()=>{
+  const hidden=password.type==="password";password.type=hidden?"text":"password";$("#togglePass").textContent=hidden?"◉":"◌";
+});
+
+/* Gift reveal */
+$("#revealGift").addEventListener("click",()=>{
+  $("#giftReveal").classList.add("show");
+  setTimeout(()=>$("#giftReveal").scrollIntoView({behavior:"smooth",block:"center"}),80);
+  burst();
+});
+$("#finalSecret").addEventListener("click",()=>{burst();setTimeout(()=>openModal("🌌","one final thing...","If you ever forget how special you are, come back here. This little universe will still be waiting for you."),300)});
+
+/* Logo easter egg */
+let logoClicks=0,logoTimer;
+$("#logo").addEventListener("click",()=>{
+  logoClicks++;clearTimeout(logoTimer);logoTimer=setTimeout(()=>logoClicks=0,1200);
+  if(logoClicks>=5){logoClicks=0;openModal("🎀","you found the tiny secret","You really clicked that five times. I don't know whether to be impressed or concerned. Mostly impressed. ♡")}
+});
+
+/* Modal love */
+$("#modalHeart").addEventListener("click",e=>{burst(e.clientX,e.clientY);showToast("love successfully sent ♡")});
+
+/* Toast */
+let toastTimer;
+function showToast(message){const toast=$("#toast");toast.textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),2200)}
+
+/* Small ambient floating symbols */
+setInterval(()=>{
+  const heart=document.createElement("div");heart.textContent=Math.random()>.5?"♡":"✦";
+  Object.assign(heart.style,{position:"fixed",left:Math.random()*100+"vw",bottom:"-20px",fontSize:10+Math.random()*13+"px",color:"#b96c82",opacity:.35,pointerEvents:"none",zIndex:-1});
+  document.body.appendChild(heart);
+  const a=heart.animate([{transform:"translateY(0) rotate(0)",opacity:.05},{transform:`translateY(-${innerHeight+100}px) rotate(180deg)`,opacity:.4}],{duration:5000+Math.random()*4000,easing:"linear"});
+  a.onfinish=()=>heart.remove();
+},1100);
+</script>
+
+<div class="photo-lightbox" id="photoLightbox" aria-hidden="true">
+  <button class="photo-close" id="photoClose" aria-label="Close photo">×</button>
+  <img id="lightboxImage" alt="couple memory">
+</div>
+
+
+<script>
+(() => {
+  const intro = document.getElementById('cinematicIntro');
+  const enter = document.getElementById('enterUniverse');
+  const cursor = document.getElementById('cursorGlow');
+  const progress = document.getElementById('scrollProgress');
+  const canvas = document.getElementById('godlyCanvas');
+  const ctx = canvas.getContext('2d');
+  const lightbox = document.getElementById('photoLightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const photoClose = document.getElementById('photoClose');
+
+  enter?.addEventListener('click', () => {
+    intro.classList.add('hide');
+    if (typeof burst === 'function') burst(innerWidth/2, innerHeight/2);
+  });
+
+  // Cursor glow on pointer devices.
+  if (matchMedia('(pointer:fine)').matches) {
+    addEventListener('pointermove', e => {
+      cursor.style.opacity = '1';
+      cursor.animate(
+        {left: e.clientX+'px', top:e.clientY+'px'},
+        {duration:420,fill:'forwards',easing:'cubic-bezier(.16,1,.3,1)'}
+      );
+    }, {passive:true});
+    addEventListener('pointerleave', () => cursor.style.opacity='0');
+  }
+
+  // Scroll progress.
+  const updateProgress = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = (max > 0 ? scrollY/max*100 : 0) + '%';
+  };
+  addEventListener('scroll', updateProgress, {passive:true});
+  addEventListener('resize', updateProgress);
+  updateProgress();
+
+  // Gentle canvas star/dust field.
+  const dots = Array.from({length: 95}, () => ({
+    x:Math.random(), y:Math.random(), r:.5+Math.random()*1.7,
+    a:.15+Math.random()*.45, s:.00004+Math.random()*.00008, p:Math.random()*Math.PI*2
+  }));
+  let cw=0,ch=0,dpr=1;
+  function resizeCanvas(){
+    dpr=Math.min(devicePixelRatio||1,2); cw=innerWidth; ch=innerHeight;
+    canvas.width=cw*dpr; canvas.height=ch*dpr; canvas.style.width=cw+'px'; canvas.style.height=ch+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resizeCanvas(); addEventListener('resize',resizeCanvas);
+  let t=0;
+  function draw(){
+    t++;
+    ctx.clearRect(0,0,cw,ch);
+    for(const d of dots){
+      d.p += d.s*12;
+      const tw=(Math.sin(d.p)+1)/2;
+      ctx.globalAlpha=d.a*(.55+.45*tw);
+      ctx.fillStyle='#b05b78';
+      ctx.beginPath(); ctx.arc(d.x*cw,(d.y*ch+t*d.s*ch)%ch,d.r,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Magnetic buttons + premium tilt cards.
+  if (matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.btn.primary,.tab,.music-btn').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r=el.getBoundingClientRect(), x=(e.clientX-r.left-r.width/2)/r.width, y=(e.clientY-r.top-r.height/2)/r.height;
+        el.style.transform=`translate(${x*5}px,${y*4}px)`;
+      });
+      el.addEventListener('pointerleave',()=>el.style.transform='');
+    });
+    document.querySelectorAll('.glass,.letter,.memory,.happy-memory-card,.game,.secret-card,.music-player').forEach(el=>{
+      el.addEventListener('pointermove',e=>{
+        const r=el.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        el.style.transform=`perspective(900px) rotateX(${-y*2.2}deg) rotateY(${x*2.6}deg) translateY(-3px)`;
+      });
+      el.addEventListener('pointerleave',()=>el.style.transform='');
+    });
+  }
+
+  // Open memory photos in a cinematic lightbox.
+  document.querySelectorAll('.happy-memory-card img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      lightboxImage.src=img.currentSrc || img.src;
+      lightboxImage.alt=img.alt || 'Happy memory';
+      lightbox.classList.add('show');
+      lightbox.setAttribute('aria-hidden','false');
+      document.body.classList.add('lock');
+    });
+  });
+  function closeLightbox(){
+    lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden','true');
+    document.body.classList.remove('lock');
+  }
+  photoClose.addEventListener('click',closeLightbox);
+  lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+
+  // Reveal a richer message after the existing final-secret action.
+  const final = document.getElementById('finalSecret');
+  final?.addEventListener('click',()=>{
+    setTimeout(()=>{
+      const text = document.getElementById('modalText');
+      if(text) text.textContent = "If I could bottle every laugh, every late-night conversation, every tiny moment that made me smile because of you, I would. Until then, this little universe gets to keep them safe. ♡";
+    }, 350);
+  });
+})();
+</script>
+
+</body>
+</html>
